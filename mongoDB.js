@@ -11,26 +11,3 @@ async function connectDB() {
   }
 }
 module.exports ={connectDB, client}
-
-
-
-
-
-
-
-
-
-
-
-
-// client.connect(err => {
-//     if (!err) {
-//         console.log("connected successfully to MongoDB");
-        
-//     }
-//     else{
-//       console.log(err);  
-//     }
-// })
-
-// module.exports =client;

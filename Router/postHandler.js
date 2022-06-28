@@ -49,6 +49,39 @@ try {
     res.send(500,error.message);
 }
 })
+// update a post
+postRoute.put('/:id', async(req, res) => {
+try {
+    const result = await posts.updateOne({_id: ObjectId(req.params.id)}
+    ,{$set:req.body},{upsert:true});
+    // console.log(result);
+    res.send(result);
+} catch (error) {
+    res.send(500,error.message);
+}
+})
+// update a post and return the updated result
+postRoute.put('/:id/return', async(req, res) => {
+try {
+    const result = await posts.findOneAndUpdate({_id: ObjectId(req.params.id)}
+    ,{$set:req.body},{upsert:false,returnOriginal:false});
+    res.send(result);
+} catch (error) {
+    console.log(error);
+    res.send(500,error.message);
+}
+})
+
+// delete a single post
+postRoute.delete('/:id', async(req, res) => {
+    try {
+        const result = await posts.deleteOne({_id: ObjectId(req.params.id)});
+        // console.log(result);
+        res.send(result);
+    } catch (error) {
+        res.send(500,error.message);
+    }
+    })
 
 // export the module
 module.exports =postRoute;
